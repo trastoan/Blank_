@@ -105,9 +105,16 @@ body {
       font-size: 4.615rem;
       line-height: 0.29577; } }
 
-#center-wrap {
+#centerwrap {
+  position: relative;
   text-align: center;
+  margin: 0 auto;
   padding-top: 45.33333px; }
+  @media (max-width: 480px) {
+    #centerwrap {
+      font-size: 73.84px;
+      font-size: 4.615rem;
+      line-height: 0.29577; } }
 
 #upperRow {
   background-color: #feffbf;
@@ -126,3 +133,37 @@ body {
 #lowerRow {
   background-color: #f1f1ff;
   min-height: 68px; }
+
+/* Bells and whistles ============================================================================== */
+.warning {
+  color: red;
+  -webkit-animation-name: errorWarning;
+  -webkit-animation-duration: 0.8s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-timing-function: linear; }
+
+@-webkit-keyframes errorWarning {
+  0% {
+    -webkit-transform: translate(2px, 0px); }
+  10% {
+    -webkit-transform: translate(-2px, 0px); }
+  20% {
+    -webkit-transform: translate(2px, 0px); }
+  30% {
+    -webkit-transform: translate(-2px, 0px); }
+  40% {
+    -webkit-transform: translate(2px, 0px); }
+  50% {
+    -webkit-transform: translate(-2px, 0px); }
+  60% {
+    -webkit-transform: translate(2px, 0px); }
+  70% {
+    -webkit-transform: translate(-2px, 0px); }
+  80% {
+    -webkit-transform: translate(2px, 0px); }
+  90% {
+    -webkit-transform: translate(-2px, 0px); }
+  100% {
+    -webkit-transform: translate(2px, 0px); } }
+
+/*# sourceMappingURL=style.css.map */
