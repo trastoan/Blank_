@@ -7,6 +7,7 @@ $(function(){
 		var wordIterator = 0;
 		var wordsArray;
 		var score;
+		var opponentScore;
 
 		// Other things from here
 
@@ -61,7 +62,7 @@ $(function(){
 			if($('.error').hasClass('warning')){
 
 			}else{
-				console.log(secretWord);
+				console.log(secretWord);	
 				console.log(e.which);
 				console.log(secretWord.charCodeAt(palavra_index));
 			    if(secretWord.charCodeAt(palavra_index) == e.which || 
@@ -108,6 +109,7 @@ $(function(){
 				console.log(data.score);
 				// $('#opponentScore #score').text(data.score);
 				receiveScore(data.score,'opponentScore');
+				opponentScore = data;
 			};
 		});
 
