@@ -3,7 +3,7 @@ $(function(){
 		var myUserNum;
 		var secretWord;
 		var palavra_index = 0;
-		var showWord = "";
+		var showWord;
 		var wordIterator = 0;
 		var wordsArray;
 		var score;
@@ -18,6 +18,7 @@ $(function(){
 		}
 
 		function createShowWord(word){
+			showWord = "";
 			for (var i = 0 ; i < word.length; i++) {
 		    	showWord += "_";
 			};
@@ -29,10 +30,8 @@ $(function(){
 		}
 
 		function updateScore(points, scoreElement){
-			console.log('chamou');
 			score = parseInt($('#'+scoreElement).find('#score').text(), 10);
 			score += points;
-
 
 			var content = score + '';
 			var fix = '';
@@ -62,6 +61,7 @@ $(function(){
 			if($('.error').hasClass('warning')){
 
 			}else{
+				console.log(secretWord);
 				console.log(e.which);
 				console.log(secretWord.charCodeAt(palavra_index));
 			    if(secretWord.charCodeAt(palavra_index) == e.which || 
@@ -76,6 +76,7 @@ $(function(){
 			        	youGotIt();
 			        	socket.emit('user got it');
 			        	gameOn();
+			        	notEasyBeingGreen();
 			        }
 			    }else{
 			      stopOnError();
