@@ -10,3 +10,7 @@ function letItGo(){
 function youGotIt(){
   $('.error').addClass('wordCompleted');
 };
+
+function notEasyBeingGreen(){
+  $('.error').removeClass('wordCompleted');
+};
