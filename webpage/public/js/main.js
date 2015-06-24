@@ -23,7 +23,7 @@ $(function(){
 
 
 		function gameOn(){
-			setTimeout(function(){changeStuff()}, 2000);
+			setTimeout(function(){changeStuff()}, 2500);
 		}
 
 		function changeStuff(){
@@ -111,6 +111,7 @@ $(function(){
 			    }else{
 			      stopOnError();
 			      socket.emit('user lost');
+			      $(waiting_for).text('Ops wrong one, you lost the word');
 			      gameOn();
 			    }
 			}
