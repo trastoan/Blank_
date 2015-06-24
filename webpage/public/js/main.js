@@ -12,19 +12,32 @@ $(function(){
 		// Other things from here
 
 		
+		function endGame(){
+			console.log(score + ', ' + opponentScore);
+			if (score > opponentScore) {
+				$(waiting_for).text('Your opponent got CRUSHED, you WON');
+			}else{
+				$(waiting_for).text('Ouch, that must hurt, you LOSE');
+			}
+		}
+
 
 		function gameOn(){
 			setTimeout(function(){changeStuff()}, 2000);
 		}
 
 		function changeStuff(){
-			secretWord = wordsArray[wordIterator];
-			createShowWord(secretWord);
-			updateLabels();
-			wordIterator ++;
-			palavra_index = 0;
-			notEasyBeingGreen();
-			letItGo();
+			if (wordIterator > 10){
+				endGame();
+			}else{
+				secretWord = wordsArray[wordIterator];
+				createShowWord(secretWord);
+				updateLabels();
+				wordIterator ++;
+				palavra_index = 0;
+				notEasyBeingGreen();
+				letItGo();
+			};
 		}
 
 		function createShowWord(word){
@@ -121,8 +134,8 @@ $(function(){
 			    		$(upperRow).append('<span id="waiting_for"></span>');	
 			    		initialCountdown('#waiting_for', 0);
 			    		socket.emit('sortear palavras');
-			    	}			    		
-			    }
+			    	};			    		
+			    };
 		});
 
 		socket.on('change Score', function(data){
@@ -130,7 +143,7 @@ $(function(){
 				console.log(data.score);
 				// $('#opponentScore #score').text(data.score);
 				receiveScore(data.score,'opponentScore');
-				opponentScore = data;
+				opponentScore = data.score;
 			};
 		});
 
@@ -141,11 +154,10 @@ $(function(){
 
 		socket.on('user finished', function(data){
 			if(data != ('Player ' + myUserNum)){
-				stopOnError();
+				youGotIt();
 				$(waiting_for).text(data +' got the word');
 				gameOn();
-			}
-			
+			};
 		});
 
 		socket.on('you won', function(data){
@@ -154,7 +166,7 @@ $(function(){
 				$(waiting_for).text(data +' made a mistake, you won');
 				addScoreOnError();
 				gameOn();
-			}
+			};
 		});
 		  // Whenever the server emits 'user joined', log it in the chat body
 		socket.on('user joined', function (data) {
