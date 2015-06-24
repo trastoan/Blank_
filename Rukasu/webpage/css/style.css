@@ -63,7 +63,11 @@ body {
       min-height: 136px; } }
 
 #score {
-  min-width: 300px; }
+  min-width: 300px;
+  text-align: center; }
+  @media (max-width: 1200px) {
+    #score {
+      min-width: 100px; } }
 
 #label {
   font-size: 28.4px;

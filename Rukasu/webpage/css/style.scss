@@ -86,6 +86,11 @@ body{
 
 #score{
 	min-width:300px;
+	text-align: center;
+	@media (max-width: 1200px){
+		min-width:100px;
+	}
+
 }
 
 #label{
