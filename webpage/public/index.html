@@ -105,12 +105,13 @@
 		addUser();
 
 		socket.on('login', function (data) {
+				console.log('login');
 			    connected = true;
 			    if (data.numUsers == 1) {
 			    	$(upperRow).append('<span id=waiting_for>Waiting for challenger</span>');	
 			    }else{
 			    	$(upperRow).append('<span id=waiting_for>Let the games begin!</span>');
-			    	socket.emit('sortear palavras');	
+			    	// socket.emit('sortear palavras');	
 			    }
 		});
 
@@ -123,15 +124,15 @@
 
 		  // Whenever the server emits 'user joined', log it in the chat body
 		socket.on('user joined', function (data) {
+			console.log('user joined');
 		    $(waiting_for).text('Let the games begin!');
-		    socket.emit('sortear palavras');
+		    // socket.emit('sortear palavras');
 		});
 
 		socket.on('user left', function (data) {
+			console.log('user left');
 		    $(waiting_for).text(data.username + " left the game, you won");
 		});
-
-		console.log(showWord);
 		
 	});
 
