@@ -18,7 +18,7 @@ $(function(){
 		}
 
 		function changeStuff(){
-		secretWord = wordsArray[wordIterator];
+			secretWord = wordsArray[wordIterator];
 			createShowWord(secretWord);
 			updateLabels();
 			wordIterator ++;
@@ -117,10 +117,11 @@ $(function(){
 			    if (data.numUsers == 1) {
 			    	$(upperRow).append('<span id="waiting_for">Waiting for challenger</span>');	
 			    }else{
-			    	//$(upperRow).append('<span id="waiting_for">Let the games begin!</span>');
-			    	$(upperRow).append('<span id="waiting_for"></span>');	
-			    	initialCountdown('#waiting_for', 0);
-			    	socket.emit('sortear palavras');	
+			    	if (data.numUsers == 2) {
+			    		$(upperRow).append('<span id="waiting_for"></span>');	
+			    		initialCountdown('#waiting_for', 0);
+			    		socket.emit('sortear palavras');
+			    	}			    		
 			    }
 		});
 
