@@ -4,6 +4,7 @@ $(function(){
 		var secretWord = "Abelardo";
 		var palavra_index = 0;
 		var showWord = "";
+		var score;
 
 		// Other things from here
 
@@ -19,10 +20,9 @@ $(function(){
 		  
 		function updateScore(points, scoreElement){
 			console.log('chamou');
-			var score = parseInt($('#'+scoreElement).find('#score').text(), 10);
+			score = parseInt($('#'+scoreElement).find('#score').text(), 10);
 			score += points;
 
-			sendScore(score);
 
 			var content = score + '';
 			var fix = '';
@@ -31,13 +31,19 @@ $(function(){
 			for(var i=0; i<5 - content.length; i++){
 				fix += '0';
 			}
-
-
 			$('#'+scoreElement).find('#score').text(fix + content);
 		}
 
-		function sendScore(points){
+		function receiveScore(points, scoreElement){
 			//send score to server
+			var content = points + '';
+			var fix = '';
+
+
+			for(var i=0; i<5 - content.length; i++){
+				fix += '0';
+			}
+			$('#'+scoreElement).find('#score').text(fix + content);
 		}
 
 		
@@ -53,7 +59,7 @@ $(function(){
 			    	){
 			        palavra_index++;
 			        updateScore(10, 'myScore');
-			  
+			  		socket.emit('update Score', score);
 			        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
 
 			        if(palavra_index == secretWord.length){
@@ -87,7 +93,8 @@ $(function(){
 		socket.on('change Score', function(data){
 			if(data.username != ('Player ' + myUserNum)) {
 				console.log(data.score);
-				$('#opponentScore #score').text(data.score);
+				// $('#opponentScore #score').text(data.score);
+				receiveScore(data.score,'opponentScore');
 			};
 		});
 
