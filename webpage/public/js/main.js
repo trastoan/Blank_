@@ -18,6 +18,7 @@ $(function(){
 		$('#middleRow2 #centerwrap').text(showWord);
 		  
 		function updateScore(points, scoreElement){
+			console.log('chamou');
 			var score = parseInt($('#'+scoreElement).find('#score').text(), 10);
 			score += points;
 
@@ -69,11 +70,7 @@ $(function(){
 		function addUser(){
 			socket.emit('add user', 'Player');
 		}
-		function updateScore(){
-			socket.emit('update Score', 30);
-		}
-
-		// updateScore()
+		
 		addUser();
 
 		socket.on('login', function (data) {
