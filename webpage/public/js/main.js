@@ -11,15 +11,20 @@ $(function(){
 
 		// Other things from here
 
+		
+
 		function gameOn(){
-			secretWord = wordsArray[wordIterator];
+			setTimeout(function(){changeStuff()}, 2000);
+		}
+
+		function changeStuff(){
+		secretWord = wordsArray[wordIterator];
 			createShowWord(secretWord);
 			updateLabels();
 			wordIterator ++;
 			palavra_index = 0;
 			notEasyBeingGreen();
 			letItGo();
-			$(waiting_for).text('Go for it!');
 		}
 
 		function createShowWord(word){
@@ -112,7 +117,9 @@ $(function(){
 			    if (data.numUsers == 1) {
 			    	$(upperRow).append('<span id="waiting_for">Waiting for challenger</span>');	
 			    }else{
-			    	$(upperRow).append('<span id="waiting_for">Let the games begin!</span>');
+			    	//$(upperRow).append('<span id="waiting_for">Let the games begin!</span>');
+			    	$(upperRow).append('<span id="waiting_for"></span>');	
+			    	initialCountdown('#waiting_for', 0);
 			    	socket.emit('sortear palavras');	
 			    }
 		});
@@ -150,7 +157,8 @@ $(function(){
 		  // Whenever the server emits 'user joined', log it in the chat body
 		socket.on('user joined', function (data) {
 			console.log('user joined');
-		    $(waiting_for).text('Let the games begin!');
+		    //$(waiting_for).text('Let the games begin!');
+		    initialCountdown('#waiting_for', 0);
 		    socket.emit('sortear palavras');
 		});
 
