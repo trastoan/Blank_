@@ -1,23 +1,33 @@
 $(function(){
 		var socket = io();
 		var myUserNum;
-		var secretWord = "Abelardo";
+		var secretWord;
 		var palavra_index = 0;
 		var showWord = "";
+		var wordIterator = 0;
+		var wordsArray;
 		var score;
 
 		// Other things from here
 
+		function gameOn(){
+			secretWord = wordsArray[wordIterator];
+			createShowWord(secretWord);
+			updateLabels();
+			wordIterator ++;
+		}
+
+		function createShowWord(word){
+			for (var i = 0 ; i < word.length; i++) {
+		    	showWord += "_";
+			};
+		}
 		
+		function updateLabels(){
+			$('#middleRow1 #centerwrap').text(secretWord);
+			$('#middleRow2 #centerwrap').text(showWord);			
+		}
 
-		for (var i = 0 ; i < secretWord.length; i++) {
-		    showWord += "_";
-		};	
-
-
-		$('#middleRow1 #centerwrap').text(secretWord);
-		$('#middleRow2 #centerwrap').text(showWord);
-		  
 		function updateScore(points, scoreElement){
 			console.log('chamou');
 			score = parseInt($('#'+scoreElement).find('#score').text(), 10);
@@ -64,6 +74,8 @@ $(function(){
 
 			        if(palavra_index == secretWord.length){
 			        	youGotIt();
+			        	socket.emit('user got it');
+			        	gameOn();
 			        }
 			    }else{
 			      stopOnError();
@@ -86,7 +98,7 @@ $(function(){
 			    	$(upperRow).append('<span id="waiting_for">Waiting for challenger</span>');	
 			    }else{
 			    	$(upperRow).append('<span id="waiting_for">Let the games begin!</span>');
-			    	// socket.emit('sortear palavras');	
+			    	socket.emit('sortear palavras');	
 			    }
 		});
 
@@ -98,11 +110,16 @@ $(function(){
 			};
 		});
 
+		socket.on('new words', function(data){
+			wordsArray = data;
+			gameOn();
+		});
+
 		  // Whenever the server emits 'user joined', log it in the chat body
 		socket.on('user joined', function (data) {
 			console.log('user joined');
 		    $(waiting_for).text('Let the games begin!');
-		    // socket.emit('sortear palavras');
+		    socket.emit('sortear palavras');
 		});
 
 		socket.on('user left', function (data) {

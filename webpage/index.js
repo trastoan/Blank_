@@ -4,7 +4,25 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 3000;
+var http = require('http');
+var fs = require('fs');
 
+
+// Getting JSON
+var file = __dirname + '/public/data/palavras.json';
+var json = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+function getWords(){
+    var wordsArray = [];
+    var num = Math.floor((Math.random()*579)+1);
+    for (var i = 0; i <= 10; i++) {
+      wordsArray.push(json[num+i].conteudo);
+    };
+    return wordsArray;
+  }
+
+
+var wordsToSend = getWords();
 
 // Routing
 app.use(express.static(__dirname + '/public'));
@@ -17,13 +35,13 @@ server.listen(port, function () {
 
 // Chatroom
 
-// usernames which are currently connected to the chat
+// users which are currently connected to the game
 var usernames = {};
 var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
-  console.log('User connectd');
+  console.log('User connected');
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
@@ -34,9 +52,15 @@ io.on('connection', function (socket) {
     });
   });
 
-  // socket.on('sortear palavras', function(){
+  socket.on('sortear palavras', function(){
+      console.log('new word requested');
+      socket.broadcast.emit('new words', wordsToSend);
+   });
 
-  // })
+  socket.on('user got it', function(){
+      console.log('user finished');
+   });
+
   socket.on('update Score', function(data){
     console.log('score update');
       socket.score = data;
@@ -45,7 +69,7 @@ io.on('connection', function (socket) {
         username: socket.username,
         score: socket.score
       })
-  })
+  });
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (username) {
     console.log('User added');
