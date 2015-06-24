@@ -122,7 +122,10 @@ body {
 
 #upperRow {
   background-color: #feffbf;
-  min-height: 68px; }
+  min-height: 68px;
+  font-size: 28.4px;
+  font-size: 1.775rem;
+  line-height: 0.29577; }
 
 #middleRow1 {
   background-color: #fcff00;
@@ -137,6 +140,12 @@ body {
 #lowerRow {
   background-color: #f1f1ff;
   min-height: 68px; }
+
+#waiting_for {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 34px; }
 
 /* Bells and whistles ============================================================================== */
 .wordCompleted {

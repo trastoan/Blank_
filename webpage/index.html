@@ -24,7 +24,7 @@
 
 	<!-- Javascript functions -->
 	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/teste.js"></script>
+	<script src="js/wordCheck.js"></script>
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/style.css" media="all">
@@ -33,8 +33,7 @@
 
 <script>
 	$(function(){
-
-		var secretWord = "meu penis rs";
+		var secretWord = "Abelardo";
 		var palavra_index = 0;
 		var showWord = "";
 
@@ -42,15 +41,18 @@
 		    showWord += "_";
 		  };	
 
+
+		$('#middleRow1 #centerwrap').text(secretWord);
+		$('#middleRow2 #centerwrap').text(showWord);
 		  
 		function updateScore(points, scoreElement){
 			var score = parseInt($('#'+scoreElement).find('#score').text(), 10);
 			score += points;
 
+			sendScore(score);
+
 			var content = score + '';
 			var fix = '';
-			console.log(content.length);
-			// console.log(5 - content.length);
 
 
 			for(var i=0; i<5 - content.length; i++){
@@ -61,18 +63,33 @@
 			$('#'+scoreElement).find('#score').text(fix + content);
 		}
 
-		$('#middleRow2 #center-wrap').text(showWord);
+		function sendScore(points){
+			//send score to server
+		}
+
+		
 		
 		$(document).keypress(function(e) {
-		    if(secretWord.charCodeAt(palavra_index) == e.which){
-		        console.log('You pressed ' + e.which +'!');
-		        palavra_index++;
-		        updateScore(10, 'myScore');
-		  
-		        $('#middleRow2 #center-wrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
-		    }else{
-		      //ERRO
-		    }
+			if($('.error').hasClass('warning')){
+
+			}else{
+				console.log(e.which);
+				console.log(secretWord.charCodeAt(palavra_index));
+			    if(secretWord.charCodeAt(palavra_index) == e.which || 
+			    	( (e.which >= 65 && e.which << 90 && e.which == secretWord.charCodeAt(palavra_index) + 32) || (e.which >= 97 && e.which << 122 && e.which == secretWord.charCodeAt(palavra_index) - 32 ) ) 
+			    	){
+			        palavra_index++;
+			        updateScore(10, 'myScore');
+			  
+			        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
+
+			        if(palavra_index == secretWord.length){
+			        	youGotIt();
+			        }
+			    }else{
+			      stopOnError();
+			    }
+			}
  	  	});
 
 
@@ -104,13 +121,11 @@
 			<div id="upperRow">
 			</div>
 			<div id="middleRow1">
-				<div id="center-wrap">
-					PALAVRA
+				<div id="centerwrap">
 				</div>
 			</div>
 			<div id="middleRow2">
-				<div id="center-wrap">
-					________
+				<div id="centerwrap">
 				</div>
 			</div>
 			<div id="lowerRow">

@@ -8,7 +8,8 @@ $yellow: #fcff00;
 $violet: #c8c7ff;
 $light_violet: #f1f1ff;
 $pink: #fc63fe;
-
+$red: #d33c2d;
+$green: #6cbb2b;
 
 /* Typography stuff */
 $font-base: 142;
@@ -83,6 +84,10 @@ body{
 	}
 }
 
+#score{
+	min-width:300px;
+}
+
 #label{
 	@include font-size($font-minimal );
 	text-align: center;
@@ -130,14 +135,24 @@ body{
 }
 
 
-#center-wrap{
-	text-align: center;
+#centerwrap{
+	position:relative;
+	text-align:center;
+	margin: 0 auto;
 	padding-top: $row_unit / 1.5;
+	max-width: 1200px;
+
+	@media (max-width: 480px){
+		@include font-size($font-subhead);
+	}
+
+	
 }
 
 #upperRow{
 	background-color: $light_yellow;
 	min-height: $row_unit;
+	@include font-size($font-minimal);
 }
 
 #middleRow1{
@@ -157,3 +172,39 @@ body{
 	min-height: $row_unit;
 }
 
+#waiting_for{
+	display:block;
+	text-align:center;
+	margin:0 auto;
+	padding-top: $row_unit/2;
+}
+
+
+
+/* Bells and whistles ============================================================================== */
+
+.wordCompleted{
+	color:$green;
+}
+
+.warning{
+	color:$red;
+	-webkit-animation-name: errorWarning;
+	-webkit-animation-duration: 0.8s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes errorWarning {
+	0% { -webkit-transform: translate(2px, 0px); }
+	10% { -webkit-transform: translate(-2px, 0px); }
+	20% { -webkit-transform: translate(2px, 0px); }
+	30% { -webkit-transform: translate(-2px, 0px); }
+	40% { -webkit-transform: translate(2px, 0px); }
+	50% { -webkit-transform: translate(-2px, 0px); }
+	60% { -webkit-transform: translate(2px, 0px); }
+	70% { -webkit-transform: translate(-2px, 0px); }
+	80% { -webkit-transform: translate(2px, 0px); }
+	90% { -webkit-transform: translate(-2px, 0px); }
+	100% { -webkit-transform: translate(2px, 0px); }
+}

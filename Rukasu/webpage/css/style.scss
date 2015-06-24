@@ -152,6 +152,7 @@ body{
 #upperRow{
 	background-color: $light_yellow;
 	min-height: $row_unit;
+	@include font-size($font-minimal);
 }
 
 #middleRow1{
@@ -169,6 +170,14 @@ body{
 #lowerRow{
 	background-color: $light_violet;
 	min-height: $row_unit;
+}
+
+#waiting_for{
+	display:block;
+	text-align:center;
+	margin:0 auto;
+	padding-top: $row_unit/2;
+	
 }
 
 

@@ -62,6 +62,9 @@ body {
     #scoreArea {
       min-height: 136px; } }
 
+#score {
+  min-width: 300px; }
+
 #label {
   font-size: 28.4px;
   font-size: 1.775rem;
@@ -105,20 +108,21 @@ body {
       font-size: 4.615rem;
       line-height: 0.29577; } }
 
-#center-wrap {
+#centerwrap {
+  position: relative;
   text-align: center;
-  padding-top: 45.33333px; }
+  margin: 0 auto;
+  padding-top: 45.33333px;
+  max-width: 1200px; }
+  @media (max-width: 480px) {
+    #centerwrap {
+      font-size: 73.84px;
+      font-size: 4.615rem;
+      line-height: 0.29577; } }
 
 #upperRow {
   background-color: #feffbf;
-  min-height: 68px;
-  font-size: 50px;
-  text-align: center; }
-
-#waiting_for{
-  display: block;
-  padding-top: 27px;
-}
+  min-height: 68px; }
 
 #middleRow1 {
   background-color: #fcff00;
@@ -133,3 +137,40 @@ body {
 #lowerRow {
   background-color: #f1f1ff;
   min-height: 68px; }
+
+/* Bells and whistles ============================================================================== */
+.wordCompleted {
+  color: #6cbb2b; }
+
+.warning {
+  color: #d33c2d;
+  -webkit-animation-name: errorWarning;
+  -webkit-animation-duration: 0.8s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-timing-function: linear; }
+
+@-webkit-keyframes errorWarning {
+  0% {
+    -webkit-transform: translate(2px, 0px); }
+  10% {
+    -webkit-transform: translate(-2px, 0px); }
+  20% {
+    -webkit-transform: translate(2px, 0px); }
+  30% {
+    -webkit-transform: translate(-2px, 0px); }
+  40% {
+    -webkit-transform: translate(2px, 0px); }
+  50% {
+    -webkit-transform: translate(-2px, 0px); }
+  60% {
+    -webkit-transform: translate(2px, 0px); }
+  70% {
+    -webkit-transform: translate(-2px, 0px); }
+  80% {
+    -webkit-transform: translate(2px, 0px); }
+  90% {
+    -webkit-transform: translate(-2px, 0px); }
+  100% {
+    -webkit-transform: translate(2px, 0px); } }
+
+/*# sourceMappingURL=style.css.map */
