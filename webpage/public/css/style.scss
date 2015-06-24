@@ -10,6 +10,7 @@ $light_violet: #f1f1ff;
 $pink: #fc63fe;
 $red: #d33c2d;
 $green: #6cbb2b;
+$dark_grey: #474747;
 
 /* Typography stuff */
 $font-base: 142;
@@ -180,6 +181,7 @@ body{
 #waiting_for{
 	display:block;
 	text-align:center;
+	color: $dark_grey;
 	margin:0 auto;
 	padding-top: $row_unit/2;
 }

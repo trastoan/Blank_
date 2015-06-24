@@ -15,15 +15,18 @@ $(function(){
 		function endGame(){
 			console.log(score + ', ' + opponentScore);
 			if (score > opponentScore) {
-				$(waiting_for).text('Your opponent got CRUSHED, you WON');
+				$(waiting_for).text('Your opponent got CRUSHED. You WIN');
 			}else{
-				$(waiting_for).text('Ouch, that must hurt, you LOSE');
+				$(waiting_for).text('Ouch, that must hurt. You LOSE');
 			}
 		}
 
+		function gameStart(){
+			setTimeout(function(){changeStuff()}, 2500);
+		}
 
 		function gameOn(){
-			setTimeout(function(){changeStuff()}, 2500);
+			setTimeout(function(){changeStuff()}, 1800);
 		}
 
 		function changeStuff(){
@@ -37,6 +40,7 @@ $(function(){
 				palavra_index = 0;
 				notEasyBeingGreen();
 				letItGo();
+				$(waiting_for).text('');
 			};
 		}
 
@@ -105,13 +109,13 @@ $(function(){
 			        if(palavra_index == secretWord.length){
 			        	youGotIt();
 			        	socket.emit('user got');
-			        	$(waiting_for).text('Bullet fingers, you got the word');
+			        	$(waiting_for).text('Bullet fingers. You got the word');
 			        	gameOn();
 			        }
 			    }else{
 			      stopOnError();
 			      socket.emit('user lost');
-			      $(waiting_for).text('Ops wrong one, you lost the word');
+			      $(waiting_for).text('Oops! Your opponent win this round');
 			      gameOn();
 			    }
 			}
@@ -150,7 +154,7 @@ $(function(){
 
 		socket.on('new words', function(data){
 			wordsArray = data;
-			gameOn();
+			gameStart();
 		});
 
 		socket.on('user finished', function(data){
@@ -164,7 +168,7 @@ $(function(){
 		socket.on('you won', function(data){
 			if(data != ('Player ' + myUserNum)){
 				stopOnError();
-				$(waiting_for).text(data +' made a mistake, you won');
+				$(waiting_for).text(data +' made a mistake');
 				addScoreOnError();
 				gameOn();
 			};
@@ -179,7 +183,7 @@ $(function(){
 
 		socket.on('user left', function (data) {
 			console.log('user left');
-		    $(waiting_for).text(data.username + " left the game, you won");
+		    $(waiting_for).text(data.username + " left the game. You WIN");
 		});
 		
 	});
