@@ -8,7 +8,8 @@ $yellow: #fcff00;
 $violet: #c8c7ff;
 $light_violet: #f1f1ff;
 $pink: #fc63fe;
-
+$red: #d33c2d;
+$green: #6cbb2b;
 
 /* Typography stuff */
 $font-base: 142;
@@ -139,6 +140,7 @@ body{
 	text-align:center;
 	margin: 0 auto;
 	padding-top: $row_unit / 1.5;
+	max-width: 1200px;
 
 	@media (max-width: 480px){
 		@include font-size($font-subhead);
@@ -173,8 +175,12 @@ body{
 
 /* Bells and whistles ============================================================================== */
 
+.wordCompleted{
+	color:$green;
+}
+
 .warning{
-	color:red;
+	color:$red;
 	-webkit-animation-name: errorWarning;
 	-webkit-animation-duration: 0.8s;
 	-webkit-transform-origin:50% 50%;

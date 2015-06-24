@@ -6,3 +6,7 @@ function stopOnError(){
 function letItGo(){
   $('.error').removeClass("warning");
 };
+
+function youGotIt(){
+  $('.error').addClass('wordCompleted');
+};

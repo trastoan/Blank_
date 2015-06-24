@@ -24,7 +24,7 @@
 
 	<!-- Javascript functions -->
 	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/error.js"></script>
+	<script src="js/wordCheck.js"></script>
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/style.css" media="all">
@@ -33,7 +33,7 @@
 
 <script>
 	$(function(){
-		var secretWord = ">tfw sick";
+		var secretWord = "Abelardo";
 		var palavra_index = 0;
 		var showWord = "";
 
@@ -73,11 +73,19 @@
 			if($('.error').hasClass('warning')){
 
 			}else{
-			    if(secretWord.charCodeAt(palavra_index) == e.which){
+				console.log(e.which);
+				console.log(secretWord.charCodeAt(palavra_index));
+			    if(secretWord.charCodeAt(palavra_index) == e.which || 
+			    	( (e.which >= 65 && e.which << 90 && e.which == secretWord.charCodeAt(palavra_index) + 32) || (e.which >= 97 && e.which << 122 && e.which == secretWord.charCodeAt(palavra_index) - 32 ) ) 
+			    	){
 			        palavra_index++;
 			        updateScore(10, 'myScore');
 			  
 			        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
+
+			        if(palavra_index == secretWord.length){
+			        	youGotIt();
+			        }
 			    }else{
 			      stopOnError();
 			    }
@@ -114,12 +122,12 @@
 			</div>
 			<div id="middleRow1">
 				<div id="centerwrap">
-					PALAVRA
+					
 				</div>
 			</div>
 			<div id="middleRow2">
 				<div class="error" id="centerwrap">
-						whatever
+						
 				</div>
 			</div>
 			<div id="lowerRow">
