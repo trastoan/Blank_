@@ -109,7 +109,10 @@ body {
       line-height: 0.29577; } }
 
 #centerwrap {
+<<<<<<< HEAD
   position: relative;
+=======
+>>>>>>> ae36b53089ff4fb78fda5a37de82da3efa054a35
   text-align: center;
   margin: 0 auto;
   padding-top: 45.33333px;

@@ -23,19 +23,22 @@ var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
+  console.log('User connectd');
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
+    console.log('new message');
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data
     });
   });
 
-  socket.on('sortear palavras', function(){
+  // socket.on('sortear palavras', function(){
 
-  })
+  // })
   socket.on('update Score', function(data){
+    console.log('score update');
       socket.score = data;
       console.log(socket.score);
       socket.broadcast.emit('change Score',{
@@ -45,6 +48,7 @@ io.on('connection', function (socket) {
   })
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (username) {
+    console.log('User added');
     // we store the username in the socket session for this client
     socket.username = username + ' ' + (numUsers+1);
     // add the client's username to the global list
@@ -63,6 +67,7 @@ io.on('connection', function (socket) {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {
+    console.log('User DC');
     // remove the username from global usernames list
     if (addedUser) {
       delete usernames[socket.username];
