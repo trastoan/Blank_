@@ -62,6 +62,9 @@ body {
     #scoreArea {
       min-height: 136px; } }
 
+#score {
+  min-width: 300px; }
+
 #label {
   font-size: 28.4px;
   font-size: 1.775rem;

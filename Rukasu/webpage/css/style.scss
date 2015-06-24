@@ -83,6 +83,10 @@ body{
 	}
 }
 
+#score{
+	min-width:300px;
+}
+
 #label{
 	@include font-size($font-minimal );
 	text-align: center;
