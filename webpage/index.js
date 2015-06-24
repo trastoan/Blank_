@@ -59,6 +59,12 @@ io.on('connection', function (socket) {
 
   socket.on('user got it', function(){
       console.log('user finished');
+      socket.broadcast.emit('Stop', socket.username);
+   });
+
+  socket.on('user lost', function(){
+      console.log('user got an error');
+      socket.broadcast.emit('you won', socket.username);
    });
 
   socket.on('update Score', function(data){
