@@ -119,7 +119,7 @@
 			    if (data.numUsers == 1) {
 			    	$(upperRow).append('<span id="waiting_for">Waiting for challenger</span>');	
 			    }else{
-			    	$(upperRow).append('<span id=waiting_for>Let the games begin!</span>');
+			    	$(upperRow).append('<span id="waiting_for">Let the games begin!</span>');
 			    	// socket.emit('sortear palavras');	
 			    }
 		});
@@ -171,12 +171,12 @@
 			</div>
 			<div id="middleRow1">
 				<div id="centerwrap">
-					PALAVRA
+
 				</div>
 			</div>
 			<div id="middleRow2">
-				<div id="centerwrap">
-					________
+				<div class="error" id="centerwrap">
+
 				</div>
 			</div>
 			<div id="lowerRow">
