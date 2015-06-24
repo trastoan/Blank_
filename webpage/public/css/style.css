@@ -109,19 +109,23 @@ body {
       line-height: 0.29577; } }
 
 #centerwrap {
-<<<<<<< HEAD
   position: relative;
-=======
->>>>>>> ae36b53089ff4fb78fda5a37de82da3efa054a35
   text-align: center;
   margin: 0 auto;
   padding-top: 45.33333px;
   max-width: 1200px; }
   @media (max-width: 480px) {
-    #centerwrap {
-      font-size: 73.84px;
-      font-size: 4.615rem;
-      line-height: 0.29577; } }
+#centerwrap {
+  font-size: 73.84px;
+  font-size: 4.615rem;
+  line-height: 0.29577; } }
+
+#waiting_for{
+  display: block;
+  padding-top: 27px;
+  text-align: center;
+  font-size: 50px;
+}
 
 #upperRow {
   background-color: #feffbf;
