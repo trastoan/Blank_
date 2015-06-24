@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<html lang="pt-BR">
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Blank !</title>
+	<meta name="keywords" content="game, quick type, typping">
+	<meta name="author" content="lucasmapurunga@gmail.com">
+	<meta http-equiv="cleartype" content="on">
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- Responsive and mobile friendly stuff -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/style.css" media="all">
+
+	<!-- JavaScript scripts -->
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/error.js"></script>
+	<script src="js/teste.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+
+</head>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+
+<script>
+	$(function(){
+		var socket = io();
+		var myUserNum;
+		var secretWord = ">tfw sick";
+		var palavra_index = 0;
+		var showWord = "";
+
+		// Other things from here
+
+		
+
+		for (var i = 0 ; i < secretWord.length; i++) {
+		    showWord += "_";
+		};	
+
+
+		$('#middleRow1 #center-wrap').text(secretWord);
+		$('#middleRow2 #center-wrap').text(showWord);
+		  
+		function updateScore(points, scoreElement){
+			var score = parseInt($('#'+scoreElement).find('#score').text(), 10);
+			score += points;
+
+			sendScore(score);
+
+			var content = score + '';
+			var fix = '';
+			console.log(content.length);
+
+
+			for(var i=0; i<5 - content.length; i++){
+				fix += '0';
+			}
+
+
+			$('#'+scoreElement).find('#score').text(fix + content);
+		}
+
+		function sendScore(points){
+			//send score to server
+		}
+
+		
+		
+		$(document).keypress(function(e) {
+		    if(secretWord.charCodeAt(palavra_index) == e.which){
+		        console.log('You pressed ' + e.which +'!');
+		        palavra_index++;
+		        updateScore(10, 'myScore');
+		  
+		        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
+		    }else{
+		      stopOnError();
+		    }
+ 	  	});
+
+
+
+		function addUser(){
+			socket.emit('add user', 'Player');
+		}
+		function updateScore(){
+			socket.emit('update Score', 30);
+		}
+
+		// updateScore()
+		addUser();
+
+		socket.on('login', function (data) {
+			    connected = true;
+			    if (data.numUsers == 1) {
+			    	$(upperRow).append('<span id=waiting_for>Waiting for challenger</span>');	
+			    }else{
+			    	$(upperRow).append('<span id=waiting_for>Let the games begin!</span>');
+			    	socket.emit('sortear palavras');	
+			    }
+		});
+
+		socket.on('change Score', function(data){
+			if(data.username != ('Player ' + myUserNum)) {
+				console.log(data.score);
+				$('#opponentScore #score').text(data.score);
+			};
+		});
+
+		  // Whenever the server emits 'user joined', log it in the chat body
+		socket.on('user joined', function (data) {
+		    $(waiting_for).text('Let the games begin!');
+		    socket.emit('sortear palavras');
+		});
+
+		socket.on('user left', function (data) {
+		    $(waiting_for).text(data.username + " left the game, you won");
+		});
+
+		console.log(showWord);
+		
+	});
+
+</script>
+<body>
+		<div id="scoreArea">
+			<div id="myScore">
+				<div id="label">
+					My score
+				</div>
+				<div class="scoreAmount" id="score">
+					00000
+				</div>
+			</div>
+
+			<div id="opponentScore">
+				<div id="label">
+					Opponent score
+				</div>
+				<div class="scoreAmount" id="score">
+					00000
+				</div>
+			</div>
+		</div>
+		<div id="gameArea">
+			<div id="upperRow">
+			</div>
+			<div id="middleRow1">
+				<div id="center-wrap">
+					PALAVRA
+				</div>
+			</div>
+			<div id="middleRow2">
+				<div id="center-wrap">
+					________
+				</div>
+			</div>
+			<div id="lowerRow">
+			</div>		
+		</div>
+	
+</body>
+
+</html>
