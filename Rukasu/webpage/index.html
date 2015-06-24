@@ -25,6 +25,7 @@
 	<!-- Javascript functions -->
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/wordCheck.js"></script>
+	<script src="js/countdown.js"></script>
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/style.css" media="all">
@@ -40,6 +41,8 @@
 		  for (var i = 0 ; i < secretWord.length; i++) {
 		    showWord += "_";
 		  };	
+
+		initialCountdown('#waiting_for', 500);
 
 
 		$('#middleRow1 #centerwrap').text(secretWord);
@@ -70,7 +73,7 @@
 		
 		
 		$(document).keypress(function(e) {
-			if($('.error').hasClass('warning')){
+			if($('.error').hasClass('warning') || !cond){
 
 			}else{
 				console.log(e.which);
