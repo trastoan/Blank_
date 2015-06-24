@@ -16,6 +16,10 @@ $(function(){
 			createShowWord(secretWord);
 			updateLabels();
 			wordIterator ++;
+			palavra_index = 0;
+			notEasyBeingGreen();
+			letItGo();
+			$(waiting_for).text('Go for it!');
 		}
 
 		function createShowWord(word){
@@ -45,8 +49,10 @@ $(function(){
 		}
 
 		function addScoreOnError(){
+			console.log(score);
 			var AddScore = (secretWord.length - palavra_index)*10;
 			updateScore(AddScore, 'myScore');
+			console.log(score);
 			socket.emit('update Score', score);
 		}
 
@@ -83,7 +89,6 @@ $(function(){
 			        	youGotIt();
 			        	socket.emit('user got it');
 			        	gameOn();
-			        	notEasyBeingGreen();
 			        }
 			    }else{
 			      stopOnError();
