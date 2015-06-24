@@ -44,6 +44,12 @@ $(function(){
 			$('#'+scoreElement).find('#score').text(fix + content);
 		}
 
+		function addScoreOnError(){
+			var AddScore = (secretWord.length - palavra_index)*10;
+			updateScore(AddScore, 'myScore');
+			socket.emit('update Score', score);
+		}
+
 		function receiveScore(points, scoreElement){
 			//send score to server
 			var content = points + '';
@@ -81,6 +87,8 @@ $(function(){
 			        }
 			    }else{
 			      stopOnError();
+			      socket.emit('user lost');
+			      gameOn();
 			    }
 			}
  	  	});
@@ -118,6 +126,22 @@ $(function(){
 			gameOn();
 		});
 
+		socket.on('Stop', function(data){
+			if(data != ('Player ' + myUserNum)){
+				stopOnError();
+				$(waiting_for).text(data +' got the word');
+				gameOn();
+			}
+		});
+
+		socket.on('you won', function(data){
+			if(data != ('Player ' + myUserNum)){
+				stopOnError();
+				$(waiting_for).text(data +' made a mistake, you won');
+				addScoreOnError();
+				gameOn();
+			}
+		});
 		  // Whenever the server emits 'user joined', log it in the chat body
 		socket.on('user joined', function (data) {
 			console.log('user joined');
