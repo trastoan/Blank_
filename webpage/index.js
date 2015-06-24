@@ -57,9 +57,9 @@ io.on('connection', function (socket) {
       socket.broadcast.emit('new words', wordsToSend);
    });
 
-  socket.on('user got it', function(){
+  socket.on('user got', function(){
       console.log('user finished');
-      socket.broadcast.emit('Stop', socket.username);
+      socket.broadcast.emit('user finished', socket.username);
    });
 
   socket.on('user lost', function(){

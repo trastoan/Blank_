@@ -74,12 +74,11 @@ $(function(){
 		}
 
 		
-		
+			
 		$(document).keypress(function(e) {
 			if($('.error').hasClass('warning')){
 
 			}else{
-				console.log(secretWord);	
 				console.log(e.which);
 				console.log(secretWord.charCodeAt(palavra_index));
 			    if(secretWord.charCodeAt(palavra_index) == e.which || 
@@ -92,7 +91,8 @@ $(function(){
 
 			        if(palavra_index == secretWord.length){
 			        	youGotIt();
-			        	socket.emit('user got it');
+			        	socket.emit('user got');
+			        	$(waiting_for).text('Bullet fingers, you got the word');
 			        	gameOn();
 			        }
 			    }else{
@@ -139,12 +139,13 @@ $(function(){
 			gameOn();
 		});
 
-		socket.on('Stop', function(data){
+		socket.on('user finished', function(data){
 			if(data != ('Player ' + myUserNum)){
 				stopOnError();
 				$(waiting_for).text(data +' got the word');
 				gameOn();
 			}
+			
 		});
 
 		socket.on('you won', function(data){
