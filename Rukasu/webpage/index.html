@@ -25,7 +25,6 @@
 	<!-- Javascript functions -->
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/error.js"></script>
-	<script src="js/teste.js"></script>
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="css/style.css" media="all">
@@ -54,7 +53,6 @@
 
 			var content = score + '';
 			var fix = '';
-			console.log(content.length);
 
 
 			for(var i=0; i<5 - content.length; i++){
@@ -72,15 +70,18 @@
 		
 		
 		$(document).keypress(function(e) {
-		    if(secretWord.charCodeAt(palavra_index) == e.which){
-		        console.log('You pressed ' + e.which +'!');
-		        palavra_index++;
-		        updateScore(10, 'myScore');
-		  
-		        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
-		    }else{
-		      stopOnError();
-		    }
+			if($('.error').hasClass('warning')){
+
+			}else{
+			    if(secretWord.charCodeAt(palavra_index) == e.which){
+			        palavra_index++;
+			        updateScore(10, 'myScore');
+			  
+			        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
+			    }else{
+			      stopOnError();
+			    }
+			}
  	  	});
 
 
