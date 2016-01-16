@@ -1,16 +1,26 @@
 function stopOnError(){
-  $('.error').addClass('warning');
+	if( $('#colorblind').checked ){
+  		$('.error').addClass('warningCbnd');
+  	}else{
+  		$('.error').addClass('warning');
+  	}
 };
 
 
 function letItGo(){
-  $('.error').removeClass("warning");
+  	$('.error').removeClass('warningCbnd');
+  	$('.error').removeClass('warning');
 };
 
 function youGotIt(){
-  $('.error').addClass('wordCompleted');
+  if( $('#colorblind').checked ){
+  		$('.error').addClass('wordCompletedCbnd');
+  	}else{
+  		$('.error').addClass('wordCompleted');
+  	}
 };
 
 function notEasyBeingGreen(){
   $('.error').removeClass('wordCompleted');
+  $('.error').removeClass('wordCompletedCbnd');
 };

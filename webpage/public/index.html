@@ -24,23 +24,23 @@
 
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/style.css" media="all">
+	<link rel="stylesheet" href="css/style.min.css" media="all">
 
 	<!-- JavaScript scripts -->
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/wordCheck.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/colorblind.js"></script>
 	<script src="js/countdown.js"></script>
 
 </head>
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
 
 
 <body>
 		<div id="scoreArea">
 			<div id="myScore">
-				<div id="label">
+				<div class="scoreLabel">
 					My score
 				</div>
 				<div class="scoreAmount" id="score">
@@ -49,7 +49,7 @@
 			</div>
 
 			<div id="opponentScore">
-				<div id="label">
+				<div class="scoreLabel">
 					Opponent score
 				</div>
 				<div class="scoreAmount" id="score">
@@ -61,16 +61,18 @@
 			<div id="upperRow">
 			</div>
 			<div id="middleRow1">
-				<div id="centerwrap">
-
+				<div class="centerwrap">
 				</div>
 			</div>
 			<div id="middleRow2">
-				<div class="error" id="centerwrap">
+				<div class="error centerwrap">
 
 				</div>
 			</div>
-			<div id="lowerRow">
+			<div class="center" id="lowerRow">
+				<form>
+					<input id="colorblind" type="checkbox" name="colorblind"> Colorblind mode
+				</form>
 			</div>		
 		</div>
 	

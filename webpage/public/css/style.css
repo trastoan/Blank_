@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* Base size */
 /* Colors */
+/* Alternative Colors */
 /* Typography stuff */
 /* Mixins ========================================================================================= */
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
@@ -30,6 +31,11 @@ h6, .h6, .secondary {
 .helper {
   font-size: 42.6px;
   font-size: 2.6625rem;
+  line-height: 0.29577; }
+
+.option {
+  font-size: 22.72px;
+  font-size: 1.42rem;
   line-height: 0.29577; }
 
 /* PASTELARIA ===================================================================================== */
@@ -63,9 +69,13 @@ body {
       min-height: 136px; } }
 
 #score {
-  min-width: 300px; }
+  min-width: 300px;
+  text-align: center; }
+  @media (max-width: 1200px) {
+    #score {
+      min-width: 100px; } }
 
-#label {
+.scoreLabel {
   font-size: 28.4px;
   font-size: 1.775rem;
   line-height: 0.29577;
@@ -108,28 +118,24 @@ body {
       font-size: 4.615rem;
       line-height: 0.29577; } }
 
-#centerwrap {
+.centerwrap {
   position: relative;
   text-align: center;
   margin: 0 auto;
   padding-top: 45.33333px;
   max-width: 1200px; }
   @media (max-width: 480px) {
-#centerwrap {
-  font-size: 73.84px;
-  font-size: 4.615rem;
-  line-height: 0.29577; } }
-
-#waiting_for{
-  display: block;
-  padding-top: 27px;
-  text-align: center;
-  font-size: 50px;
-}
+    .centerwrap {
+      font-size: 73.84px;
+      font-size: 4.615rem;
+      line-height: 0.29577; } }
 
 #upperRow {
   background-color: #feffbf;
-  min-height: 68px; }
+  min-height: 68px;
+  font-size: 28.4px;
+  font-size: 1.775rem;
+  line-height: 0.29577; }
 
 #middleRow1 {
   background-color: #fcff00;
@@ -142,12 +148,35 @@ body {
   color: #fcff00; }
 
 #lowerRow {
+  font-size: 22.72px;
+  font-size: 1.42rem;
+  line-height: 0.29577;
   background-color: #f1f1ff;
   min-height: 68px; }
+  #lowerRow form {
+    text-align: center;
+    padding-top: 20px; }
+
+#waiting_for {
+  display: block;
+  text-align: center;
+  color: #474747;
+  margin: 0 auto;
+  padding-top: 34px; }
 
 /* Bells and whistles ============================================================================== */
 .wordCompleted {
   color: #6cbb2b; }
+
+.wordCompletedCbnd {
+  color: #003696; }
+
+.warningCbnd {
+  color: #615900;
+  -webkit-animation-name: errorWarning;
+  -webkit-animation-duration: 0.8s;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-timing-function: linear; }
 
 .warning {
   color: #d33c2d;

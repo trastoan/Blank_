@@ -52,8 +52,8 @@ $(function(){
 		}
 		
 		function updateLabels(){
-			$('#middleRow1 #centerwrap').text(secretWord);
-			$('#middleRow2 #centerwrap').text(showWord);			
+			$('#middleRow1 .centerwrap').text(secretWord);
+			$('#middleRow2 .centerwrap').text(showWord);			
 		}
 
 		function updateScore(points, scoreElement){
@@ -104,7 +104,7 @@ $(function(){
 			        palavra_index++;
 			        updateScore(10, 'myScore');
 			  		socket.emit('update Score', score);
-			        $('#middleRow2 #centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
+			        $('#middleRow2 .centerwrap').text(secretWord.substr(0, palavra_index) + showWord.substr(0 + palavra_index, showWord.length));
 
 			        if(palavra_index == secretWord.length){
 			        	youGotIt();
@@ -115,7 +115,7 @@ $(function(){
 			    }else{
 			      stopOnError();
 			      socket.emit('user lost');
-			      $(waiting_for).text('Oops! Your opponent win this round');
+			      $(waiting_for).text('Oops! Your opponent won this round');
 			      gameOn();
 			    }
 			}
@@ -129,6 +129,7 @@ $(function(){
 		
 		addUser();
 
+		
 		socket.on('login', function (data) {
 				console.log('login');
 			    connected = true;
